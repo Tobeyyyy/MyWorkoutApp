@@ -18,23 +18,7 @@
         var d=today.getDate();
         var t=today.getHours();
         var current= m+'/'+d+' '+t
-        
-        function ipLookUp () {
-            var ipArray={};
-            $.get("https://ipapi.co/json", function(data, status){
-                  ipArray['city']=data.city;
-                  ipArray['country']=data.country;
-                  ipArray['ip']=data.ip;
-                  ipArray['org']=data.org;
-                  ipArray['city']=data.city;
-                  ipArray['region']=data.region;
-                  ipArray['current']=current;
-                  console.log(data);
-                  connectDB(ipArray);
-                  console.log(current);
-                  });
-        }
-    ipLookUp();
+
     //Firebase
     function connectDB(thisip){
         //initialize firebase
