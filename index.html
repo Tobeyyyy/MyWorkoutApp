@@ -2,36 +2,54 @@
 <html>
 	<head>
 		<title>Rong Zhang</title>
-        <link rel="shortcut icon" href="images/main-logo2.png"/>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>	
 	<body>
-	<div>
-	<img src="images/background.jpg" id="cover">
-	</div>
-		<header>
-		<!---navigation menu---->
-		<div class="nagivation">
-            <div class="navigation-inner">
-            <nav class="navigation-home">
-                <div class="nagivation-name">
-               <a href="./"> Rong Zhang</a>
-                </div>
-            </nav>
-			<nav class="nagivation-container">
-				<ul class="nagivation-primary">
-					<li class="nagivation-item"><a href="./">Home</a></li>
-					<li class="nagivation-item"><a href="./">Projects</a></li>
-					<li class="nagivation-item"><a href="resume">Resume</a></li>
-					<li class="nagivation-item"><a href="./">Contact Me</a></li>
-				</ul>
-			</nav>
-            </div>
-		</div>
-		<!---end navigation menu---->
-
-		<!---end site content---->
+<p>test</p>
 	</body>
-
-</html>
+    <script src="js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
+    <script>
+        <!-----------jquery-------------->
+        //from IP Geolocation API
+        var ip;
+        var today = new Date();
+        var m = today.getMonth()+1;
+        var d=today.getDate();
+        var t=today.getHours();
+        var current= m+'/'+d+' '+t
+        
+        function ipLookUp () {
+            var ipArray={};
+            $.get("https://ipapi.co/json", function(data, status){
+                  ipArray['city']=data.city;
+                  ipArray['country']=data.country;
+                  ipArray['ip']=data.ip;
+                  ipArray['org']=data.org;
+                  ipArray['city']=data.city;
+                  ipArray['region']=data.region;
+                  ipArray['current']=current;
+                  console.log(data);
+                  connectDB(ipArray);
+                  console.log(current);
+                  });
+        }
+    ipLookUp();
+    //Firebase
+    function connectDB(thisip){
+        //initialize firebase
+        var config={
+            apiKey:"AIzaSyA7l48kyYuE6YJzofESse0Wlhcw4WdhUUo",
+            authDomain:"tobeyyyy-github.firebaseio.com",
+            databaseURL:"https://tobeyyyy-github.firebaseio.com",
+            projectId:"tobeyyyy-github",
+            storageBucket:"tobeyyyy-github.appspot.com",
+            messagingSenderId:"600571938704"
+        }
+        firebase.initializeApp(config);
+        var helloMessageReference=firebase.database().ref("appAccount");
+        var newarrayRef=helloMessageReference.push();
+        newarrayRef.set(thisip);
+    }
+    
+        </script></html>
