@@ -22,9 +22,31 @@
             storageBucket:"myworkoutapp-fa0a6.appspot.com"//bucket.appspot.com
         }
         firebase.initializeApp(config);
+	firebase.auth().useDeviceLanguage();
+	    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
+  'size': 'invisible',
+  'callback': function(response) {
+    // reCAPTCHA solved, allow signInWithPhoneNumber.
+    onSignInSubmit();
+  }
+});
+	    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+	    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+  'size': 'normal',
+  'callback': function(response) {
+    // reCAPTCHA solved, allow signInWithPhoneNumber.
+    // ...
+  },
+  'expired-callback': function() {
+    // Response expired. Ask user to solve reCAPTCHA again.
+    // ...
+  }
+});
+
+
         var helloMessageReference=firebase.database().ref("appAccount");
-        var newarrayRef=helloMessageReference.push();
-        newarrayRef.set('ok');
+       // var newarrayRef=helloMessageReference.push();
+        //newarrayRef.set('ok');
     }
     
         </script></html>
