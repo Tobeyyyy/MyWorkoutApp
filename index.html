@@ -24,9 +24,9 @@
         firebase.initializeApp(config);
 	var dbRefObej=firebase.database().ref().child('object');
         var helloMessageReference=firebase.database().ref("appAccount");
-	    dbRefObej.on('value',snap=>console.log(snap.val()));
-       // var newarrayRef=helloMessageReference.push();
-        //newarrayRef.set('ok');
+	  //  dbRefObej.on('value',snap=>console.log(snap.val()));
+        var newarrayRef=helloMessageReference.push();
+        newarrayRef.set('ohh');
     }
     
         </script></html>
